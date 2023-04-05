@@ -14,17 +14,17 @@ function addBookToLibrary(book) {
 }
 
 function createBookCard(book) {
-  return `<div class="card text-center w-25">
+  return `<div class="card text-center w-25 me-4">
         <div class="card-body">
           <h5 class="card-title">${book.title}</h5>
-          <h6 class="card-subtitle">${book.author}</h6>
-          <ul class="list-group">
-            <li class="list-group-item">${book.pages} pages</li>
-          </ul>
+          <h6 class="card-subtitle">By ${book.author}.</h6>
+          
+            <p><em>${book.pages} pages</em></p>
+          
           <label class="switch">
-              <input type="checkbox"></input>
-              <span class="slider"></span>
-            </label>
+            <input type="checkbox"></input>
+            <span class="slider round"></span>
+          </label>
         </div>
       </div>`;  
 }
