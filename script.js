@@ -22,13 +22,18 @@ function createBookCard(book) {
             <p><em>${book.pages} pages</em></p>
           
           <label class="switch">
-            <input type="checkbox"></input>
+            <input type="checkbox" ${setSlider(book)}></input>
             <span class="slider round"></span>
           </label>
         </div>
       </div>`;  
 }
 
+function setSlider(book) {
+  if (book.read === true) {
+    return 'checked'
+  }
+}
 
 function removeBookFromDisplay() {
   //some code to delete book's html card
