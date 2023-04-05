@@ -35,6 +35,13 @@ function setSlider(book) {
   }
 }
 
+function toggleReadStatus(book) {
+  if (book.read === true) {
+    return 'Read'
+  };
+  return 'Not Read'
+}
+
 function removeBookFromDisplay() {
   //some code to delete book's html card
 }
