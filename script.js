@@ -1,5 +1,11 @@
 const catalogue = document.querySelector('#catalogue')
+//const read_status = document.querySelector(book.index)
+
 let myLibrary = [];
+
+const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false, 0);
+const book2 = new Book('To Kill a Mockingbird', 'Harper Lee', 336, true, 1)
+const book3 = new Book('Lord of the Flies', 'William Golding', 182, false, 2)
 
 function Book(title, author, pages, read, index) {
   this.title = title
@@ -23,8 +29,9 @@ function createBookCard(book) {
           
           <label class="switch">
             <input type="checkbox" ${setSlider(book)}></input>
-            <span class="slider round"></span>
+            <span class="slider round" data-id=${book.index}></span>
           </label>
+          <div id="read${book.index}">${readStatus(book)}</div>
         </div>
       </div>`;  
 }
@@ -35,11 +42,15 @@ function setSlider(book) {
   }
 }
 
-function toggleReadStatus(book) {
+function readStatus(book) {
   if (book.read === true) {
     return 'Read'
   };
   return 'Not Read'
+}
+
+function setReadStatus(book) {
+  document.getElementById(`read${book.index}`).innerHTML = readStatus(book)
 }
 
 function removeBookFromDisplay() {
@@ -59,16 +70,9 @@ function deleteBook(book) {
   myLibrary.splice(book.index,1)
 }
 
-Book.prototype.toggleRead = function() {
-  if (this.read === true) {
-    return this.read = false
-  };
-  this.read = true  
+function toggleRead(book) {
+  book.read = !book.read
 }
-
-const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false, 0);
-const book2 = new Book('To Kill a Mockingbird', 'Harper Lee', 336, true, 1)
-const book3 = new Book('Lord of the Flies', 'William Golding', 182, false, 2)
 
 addBookToLibrary(book1)
 addBookToLibrary(book2)
@@ -76,3 +80,12 @@ addBookToLibrary(book3)
 console.log(myLibrary)
 
 displayBooks(myLibrary)
+
+const sliders = document.querySelectorAll('.slider')
+
+sliders.forEach(sld => sld.addEventListener('click', (e) => {
+  let book = myLibrary[e.target.dataset.id]
+  toggleRead(book);
+  setReadStatus(book);
+})
+)
