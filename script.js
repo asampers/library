@@ -1,5 +1,6 @@
 const catalogue = document.querySelector('#catalogue')
-
+const form = document.querySelector('#hidden-form')
+const modal = document.querySelector('.modal')
 const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false, 0);
 const book2 = new Book('To Kill a Mockingbird', 'Harper Lee', 336, true, 1)
 const book3 = new Book('Lord of the Flies', 'William Golding', 182, false, 2)
@@ -12,7 +13,24 @@ function Book(title, author, pages, read, index) {
   this. pages = pages
   this.read = read
   this.index = index
-};
+}
+
+form.addEventListener('submit', (event) => {
+    event.preventDefault()
+    let lastBook = myLibrary.at(-1)
+    let formValue = event.target.elements;
+    let newBook = new Book(
+      formValue.title.value,
+      formValue.author.value,
+      formValue.pages.value,
+      formValue.read.checked,
+      (lastBook.index += 1)
+    );
+    modal.classList.remove('show')
+    addBookToLibrary(newBook)
+    let card = createBookCard(newBook)
+  catalogue.insertAdjacentHTML('afterbegin', card)
+})
 
 function addBookToLibrary(book) {
   myLibrary.push(book)
@@ -87,6 +105,7 @@ sliders.forEach(sld => sld.addEventListener('click', (e) => {
   toggleRead(book);
   setReadStatus(book);
 })
-)
+);
+
 
  
