@@ -15,22 +15,7 @@ function Book(title, author, pages, read, index) {
   this.index = index
 }
 
-form.addEventListener('submit', (event) => {
-    event.preventDefault()
-    let lastBook = myLibrary.at(-1)
-    let formValue = event.target.elements;
-    let newBook = new Book(
-      formValue.title.value,
-      formValue.author.value,
-      formValue.pages.value,
-      formValue.read.checked,
-      (lastBook.index += 1)
-    );
-    modal.classList.remove('show')
-    addBookToLibrary(newBook)
-    let card = createBookCard(newBook)
-  catalogue.insertAdjacentHTML('afterbegin', card)
-})
+
 
 function addBookToLibrary(book) {
   myLibrary.push(book)
@@ -107,5 +92,21 @@ sliders.forEach(sld => sld.addEventListener('click', (e) => {
 })
 );
 
+form.addEventListener('submit', (event) => {
+    event.preventDefault()
+    let lastBook = myLibrary.at(-1)
+    let formValue = event.target.elements;
+    let newBook = new Book(
+      formValue.title.value,
+      formValue.author.value,
+      formValue.pages.value,
+      formValue.read.checked,
+      (lastBook.index + 1)
+    );
+    modal.classList.remove('show')
+    addBookToLibrary(newBook)
+    let card = createBookCard(newBook)
+  catalogue.insertAdjacentHTML('afterbegin', card)
+})
 
  
