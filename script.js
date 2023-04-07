@@ -15,8 +15,6 @@ function Book(title, author, pages, read, index) {
   this.index = index
 }
 
-
-
 function addBookToLibrary(book) {
   myLibrary.push(book)
 }
@@ -83,14 +81,6 @@ console.log(myLibrary)
 
 displayBooks(myLibrary)
 
-const sliders = document.querySelectorAll('.slider')
-
-sliders.forEach(sld => sld.addEventListener('click', (e) => {
-  let book = myLibrary[e.target.dataset.id]
-  toggleRead(book);
-  setReadStatus(book);
-})
-);
 
 form.addEventListener('submit', (event) => {
     event.preventDefault()
@@ -106,7 +96,20 @@ form.addEventListener('submit', (event) => {
     modal.classList.remove('show')
     addBookToLibrary(newBook)
     let card = createBookCard(newBook)
-  catalogue.insertAdjacentHTML('afterbegin', card)
+    catalogue.insertAdjacentHTML('afterbegin', card)
+    let slider = document.querySelector('.slider')
+    addSliderClicker(slider)
+    sliders.push(slider)
 })
 
+let sliders = Array.from(document.querySelectorAll('.slider'))
+
+sliders.forEach(sld => addSliderClicker(sld));
  
+function addSliderClicker(slider) {
+  slider.addEventListener('click', (e) => {
+  let book = myLibrary[e.target.dataset.id]
+  toggleRead(book);
+  setReadStatus(book);
+})
+}
