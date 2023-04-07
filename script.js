@@ -44,16 +44,12 @@ function setSlider(book) {
 }
 
 function readStatus(book) {
-  if (book.read === true) {
-    return 'Read'
-  };
-  return 'Not Read'
+  return (book.read ? 'Read' : 'Not Read');
 }
 
 function setReadStatus(book) {
   document.getElementById(`read${book.index}`).innerHTML = readStatus(book)
 }
-
 
 function displayBooks(myLibrary) {
   //some code to initially display any books
@@ -108,7 +104,7 @@ sliders.forEach(sld => addSliderClicker(sld));
  
 function addSliderClicker(slider) {
   slider.addEventListener('click', (e) => {
-  let book = myLibrary[e.target.dataset.id]
+  let book = myLibrary.find(book => book.index == e.target.dataset.id)
   toggleRead(book);
   setReadStatus(book);
 })
