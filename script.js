@@ -67,7 +67,6 @@ function displayBooks(myLibrary) {
 function deleteBook(index) {
   myLibrary.splice(index,1);
   document.getElementById(`book${index}`).remove();
-  
 }
 
 function toggleRead(book) {
@@ -93,7 +92,8 @@ form.addEventListener('submit', (event) => {
       formValue.read.checked,
       (lastBook.index + 1)
     );
-    modal.classList.remove('show')
+    form.reset()
+    document.querySelector('.toggle-modal').click()
     addBookToLibrary(newBook)
     let card = createBookCard(newBook)
     catalogue.insertAdjacentHTML('afterbegin', card)
