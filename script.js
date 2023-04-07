@@ -41,8 +41,9 @@ function displayBooks(myLibrary) {
 }
 
 function createBookCard(book) {
-  return `<div id="book${book.index}" class="card text-center w-25 me-4">
-        <div class="card-body">
+  return `<div class="col-12 col-sm-3">
+      <div id="book${book.index}" class="mt-3 card text-center">
+        <div class="card-body h">
           <h5 class="card-title">${book.title}</h5>
           <h6 class="card-subtitle">By ${book.author}.</h6>
             <p><em>${book.pages} pages</em></p>
@@ -53,7 +54,8 @@ function createBookCard(book) {
           <div id="read${book.index}">${readStatus(book)}</div>
         </div>
         <button onclick='deleteBook(${book.index})' id="delete${book.index}" class="delete btn btn-sm btn-secondary">Delete book?</button>
-      </div>`;  
+      </div>
+      </div`;  
 }
 
 function setSlider(book) {
