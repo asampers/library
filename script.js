@@ -75,7 +75,7 @@ function toggleRead(book) {
 
 function addSliderClicker(slider) {
   slider.addEventListener('click', (e) => {
-    let book = myLibrary.find((bk) => bk.index === e.target.dataset.id);
+    let book = myLibrary[e.target.dataset.id];
     toggleRead(book);
     setReadStatus(book);
   });
@@ -101,9 +101,9 @@ form.addEventListener('submit', (event) => {
   addSliderClicker(slider);
 });
 
-document.querySelectorAll('.slider').forEach((sld) => addSliderClicker(sld));
-
 addBookToLibrary(book1);
 addBookToLibrary(book2);
 addBookToLibrary(book3);
 displayBooks(myLibrary);
+
+document.querySelectorAll('.slider').forEach((sld) => addSliderClicker(sld));
