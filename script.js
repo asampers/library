@@ -23,7 +23,8 @@ function addBookToLibrary(book) {
 // remove book from myLibrary and on webpage
 // eslint-disable-next-line no-unused-vars
 function deleteBook(index) {
-  myLibrary.splice(index, 1);
+  let ind = myLibrary.findIndex((bk) => bk.index === index);
+  myLibrary.splice(ind, 1);
   document.getElementById(`book${index}`).remove();
 }
 
@@ -76,7 +77,6 @@ function toggleRead(book) {
 function addSliderClicker(slider) {
   slider.addEventListener('click', (e) => {
     let book = myLibrary.find((bk) => bk.index === Number(e.target.dataset.id));
-    //console.log(book);
     toggleRead(book);
     setReadStatus(book);
   });
@@ -85,7 +85,6 @@ function addSliderClicker(slider) {
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   let lastBook = myLibrary.at(-1);
-  //console.log(lastBook.index);
   let formValue = event.target.elements;
   let newBook = new Book(
     formValue.title.value,
