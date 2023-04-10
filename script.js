@@ -75,7 +75,8 @@ function toggleRead(book) {
 
 function addSliderClicker(slider) {
   slider.addEventListener('click', (e) => {
-    let book = myLibrary[e.target.dataset.id];
+    let book = myLibrary.find((bk) => bk.index === Number(e.target.dataset.id));
+    //console.log(book);
     toggleRead(book);
     setReadStatus(book);
   });
@@ -84,6 +85,7 @@ function addSliderClicker(slider) {
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   let lastBook = myLibrary.at(-1);
+  //console.log(lastBook.index);
   let formValue = event.target.elements;
   let newBook = new Book(
     formValue.title.value,
