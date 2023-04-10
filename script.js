@@ -35,12 +35,12 @@ function setSlider(book) {
   }
 }
 
-function readStatus(book) {
-  return (book.read ? 'Read' : 'Not Read');
-}
+Book.prototype.readStatus = function readStatus() {
+  return (this.read ? 'Read' : 'Not Read');
+};
 
 function setReadStatus(book) {
-  document.getElementById(`read${book.index}`).innerHTML = readStatus(book);
+  document.getElementById(`read${book.index}`).innerHTML = book.readStatus();
 }
 
 function createBookCard(book) {
@@ -54,7 +54,7 @@ function createBookCard(book) {
             <input type="checkbox" ${setSlider(book)}></input>
             <span class="slider round" data-id=${book.index}></span>
           </label>
-          <div id="read${book.index}">${readStatus(book)}</div>
+          <div id="read${book.index}">${book.readStatus()}</div>
         </div>
         <button onclick='deleteBook(${book.index})' id="delete${book.index}" class="delete btn btn-sm btn-secondary">Delete book?</button>
       </div>
@@ -69,15 +69,15 @@ function displayBooks(library) {
   });
 }
 
-function toggleRead(book) {
+Book.prototype.toggleRead = function toggleRead() {
   // eslint-disable-next-line no-param-reassign
-  book.read = !book.read;
-}
+  this.read = !this.read;
+};
 
 function addSliderClicker(slider) {
   slider.addEventListener('click', (e) => {
     let book = myLibrary.find((bk) => bk.index === Number(e.target.dataset.id));
-    toggleRead(book);
+    book.toggleRead();
     setReadStatus(book);
   });
 }
