@@ -47,8 +47,8 @@ function setReadStatus(book) {
 }
 
 function createBookCard(book) {
-  return `<div class="col-12 col-sm-3">
-      <div id="book${book.index}" class="mt-3 card text-center">
+  return `<div id="book${book.index}" class="col-12 col-sm-3">
+      <div class="mt-3 card text-center">
         <div class="card-body h">
           <h5 class="card-title">${book.title}</h5>
           <h6 class="card-subtitle">By ${book.author}.</h6>
@@ -89,7 +89,7 @@ form.addEventListener('submit', (event) => {
     formValue.author.value,
     formValue.pages.value,
     formValue.read.checked,
-    (lastBook.index + 1),
+    (lastBook ? lastBook.index + 1 : 0),
   );
   form.reset();
   document.querySelector('.toggle-modal').click();
