@@ -4,12 +4,22 @@ const form = document.querySelector('#hidden-form');
 const myLibrary = [];
 
 // book constructor
-function Book(title, author, pages, read, index) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.index = index;
+class Book {
+  constructor(title, author, pages, read, index) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.index = index;
+  }
+
+  readStatus() {
+    return (this.read ? 'Read' : 'Not Read');
+  }
+
+  toggleRead() {
+    this.read = !this.read;
+  }
 }
 
 const book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false, 0);
@@ -28,16 +38,9 @@ function deleteBook(index) {
   document.getElementById(`book${index}`).remove();
 }
 
-// eslint-disable-next-line consistent-return
 function setSlider(book) {
-  if (book.read === true) {
-    return 'checked';
-  }
+  return (book.read === true ? 'checked' : 'unchecked');
 }
-
-Book.prototype.readStatus = function readStatus() {
-  return (this.read ? 'Read' : 'Not Read');
-};
 
 function setReadStatus(book) {
   document.getElementById(`read${book.index}`).innerHTML = book.readStatus();
@@ -68,11 +71,6 @@ function displayBooks(library) {
     catalogue.insertAdjacentHTML('afterbegin', card);
   });
 }
-
-Book.prototype.toggleRead = function toggleRead() {
-  // eslint-disable-next-line no-param-reassign
-  this.read = !this.read;
-};
 
 function addSliderClicker(slider) {
   slider.addEventListener('click', (e) => {
