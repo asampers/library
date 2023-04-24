@@ -3,7 +3,7 @@ const catalogue = document.querySelector('#catalogue');
 const form = document.querySelector('#hidden-form');
 const myLibrary = [];
 
-// book constructor
+// book class
 class Book {
   constructor(title, author, pages, read, index) {
     this.title = title;
